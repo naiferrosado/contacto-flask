@@ -5,105 +5,276 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contacto - Naifer A. Rosado</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
+    <style>
+      :root {
+        --primary: #6c63ff;
+        --secondary: #ff6584;
+        --dark-bg: #121212;
+        --dark-card: #1e1e1e;
+        --dark-text: #e0e0e0;
+        --dark-border: #333;
+      }
+
+      body {
+        background-color: var(--dark-bg);
+        color: var(--dark-text);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        flex: 1;
+      }
+
+      .contact-card {
+        background-color: var(--dark-card);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--dark-border);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .contact-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .card-header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        text-align: center;
+        padding: 2.5rem 1rem;
+      }
+
+      .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 1rem;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--dark-text);
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+      }
+
+      .social-icon:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .github:hover {
+        background: #333;
+        color: white;
+      }
+
+      .linkedin:hover {
+        background: #0077b5;
+        color: white;
+      }
+
+      .instagram:hover {
+        background: #e4405f;
+        color: white;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border: none;
+        padding: 0.75rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
+      }
+
+      footer {
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 1.5rem;
+        margin-top: 2rem;
+        border-top: 1px solid var(--dark-border);
+      }
+
+      .form-control {
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--dark-border);
+        color: var(--dark-text);
+      }
+
+      .form-control:focus {
+        background-color: rgba(255, 255, 255, 0.08);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 0.25rem rgba(108, 99, 255, 0.25);
+        color: var(--dark-text);
+      }
+
+      .form-label {
+        color: var(--dark-text);
+        font-weight: 500;
+      }
+
+      .alert {
+        border-radius: 10px;
+        border: none;
+      }
+
+      .contact-title {
+        color: var(--primary);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+      }
+
+      .glow-text {
+        text-shadow: 0 0 10px rgba(108, 99, 255, 0.5);
+      }
+    </style>
   </head>
   <body>
-    <div class="container mt-5">
-      <!-- Encabezado con nombre y redes sociales -->
-      <div class="text-center mb-4">
-        <h1>Naifer A. Rosado</h1>
-        <p class="lead">Desarrollador Web</p>
-
-        <!-- Iconos de redes sociales -->
-        <div class="social-links">
-          <a
-            href="https://github.com/tuusuario"
-            class="social-icon"
-            target="_blank"
-            title="GitHub"
-          >
-            <i class="fab fa-github"></i>
-          </a>
-          <a
-            href="https://linkedin.com/in/tuusuario"
-            class="social-icon"
-            target="_blank"
-            title="LinkedIn"
-          >
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a
-            href="https://instagram.com/tuusuario"
-            class="social-icon"
-            target="_blank"
-            title="Instagram"
-          >
-            <i class="fab fa-instagram"></i>
-          </a>
-        </div>
-      </div>
-
-      <h2 class="text-center mb-4">Contáctame</h2>
-
-      {% with messages = get_flashed_messages(with_categories=true) %} {% if
-      messages %} {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">{{ message }}</div>
-      {% endfor %} {% endif %} {% endwith %}
-
+    <div class="container my-5">
       <div class="row justify-content-center">
-        <div class="col-md-8">
-          <form method="POST" action="/">
-            <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre</label>
-              <input
-                type="text"
-                class="form-control"
-                id="nombre"
-                name="nombre"
-                required
+        <div class="col-md-8 col-lg-6">
+          <div class="contact-card">
+            <div class="card-header">
+              <img
+                src="https://ui-avatars.com/api/?name=Naifer+A.+Rosado&size=120&background=6C63FF&color=fff&bold=true"
+                alt="Naifer A. Rosado"
+                class="profile-img"
               />
+              <h2 class="glow-text">Naifer A. Rosado</h2>
+              <p class="mb-0">Sitios de interes</p>
+
+              <div class="social-links">
+                <a
+                  href="https://github.com"
+                  class="social-icon github"
+                  target="_blank"
+                >
+                  <i class="fab fa-github"></i>
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  class="social-icon linkedin"
+                  target="_blank"
+                >
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                  href="https://instagram.com"
+                  class="social-icon instagram"
+                  target="_blank"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
             </div>
 
-            <div class="mb-3">
-              <label for="correo" class="form-label">Correo electrónico</label>
-              <input
-                type="email"
-                class="form-control"
-                id="correo"
-                name="correo"
-                required
-              />
-            </div>
+            <div class="card-body p-4">
+              <h3 class="contact-title text-center">Contáctame</h3>
 
-            <div class="mb-3">
-              <label for="mensaje" class="form-label">Mensaje</label>
-              <textarea
-                class="form-control"
-                id="mensaje"
-                name="mensaje"
-                rows="4"
-                required
-              ></textarea>
-            </div>
+              <!-- Simulación de mensajes flash -->
+              <div class="alert alert-info d-none" id="flash-message">
+                Este es un ejemplo de mensaje flash
+              </div>
 
-            <button type="submit" class="btn btn-primary w-100">Enviar</button>
-          </form>
+              <form method="POST" action="/">
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    name="nombre"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="correo" class="form-label"
+                    >Correo electrónico</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="correo"
+                    name="correo"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="mensaje" class="form-label">Mensaje</label>
+                  <textarea
+                    class="form-control"
+                    id="mensaje"
+                    name="mensaje"
+                    rows="4"
+                    required
+                  ></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mt-3">
+                  Enviar Mensaje
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <footer class="text-center mt-5">
+    <footer class="text-center">
       <p>© 2025 Naifer A. Rosado | Hecho con Flask & Bootstrap</p>
     </footer>
+
+    <script>
+      // Simulación de funcionalidad de envío de formulario
+      document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        document.getElementById("flash-message").classList.remove("d-none");
+        document.getElementById("flash-message").textContent =
+          "¡Mensaje enviado con éxito! Te contactaré pronto.";
+        document.getElementById("flash-message").className =
+          "alert alert-success";
+
+        // Limpiar formulario
+        this.reset();
+
+        // Ocultar mensaje después de 5 segundos
+        setTimeout(() => {
+          document.getElementById("flash-message").classList.add("d-none");
+        }, 5000);
+      });
+    </script>
   </body>
 </html>
